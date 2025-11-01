@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: DomainShop
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: DomainsBasket
+    redis:
+      host: localhost
+      port: 6379
+      password: 123
+
+  cache:
+    redis:
+      time-to-live: 60000
