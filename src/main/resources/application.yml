@@ -16,4 +16,4 @@ spring:
       time-to-live: 60000
   domain:
     client:
-      domainr: https://api.domainr.com/v2
+      rdap:  https://rdap.org/domain
