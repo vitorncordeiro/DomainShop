@@ -1,21 +1,32 @@
 package com.lovestoblog.vitornatal.domainshop.service;
 
-import client.RDAPClient;
-import client.response.DomainSearchResponse;
-import client.response.DomainStatusResponse;
-import org.springframework.beans.factory.annotation.Value;
+import com.lovestoblog.vitornatal.domainshop.client.RDAPClient;
+import com.lovestoblog.vitornatal.domainshop.client.response.DomainSearchResponse;
+import com.lovestoblog.vitornatal.domainshop.exception.InvalidTldException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DomainService {
 
-    private final RDAPClient client;
+    private final RDAPClient rdapClient;
+    private final TldService tldService;
 
-    public DomainService(RDAPClient client){
-        this.client = client;
+    public DomainService(RDAPClient rdapClient, TldService tldService){
+        this.rdapClient = rdapClient;
+        this.tldService = tldService;
     }
 
-    public DomainSearchResponse search(String query){
-        return  client.search(query);
+    public DomainSearchResponse search(String query) {
+        if(!tldService.isValidTld(query)){
+            throw new InvalidTldException("TLD not valid");
+        }
+
+        try{
+            return rdapClient.search(query);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 }
