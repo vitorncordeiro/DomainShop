@@ -7,16 +7,14 @@ import client.response.DomainSearchResponse;
 import client.response.DomainStatusResponse;
 
 
-@FeignClient(name="domainr", url= "${domain.client.domainr}")
-public interface DomainrClient {
+@FeignClient(name="rdap", url= "${domain.client.rdap}")
+public interface RDAPClient {
     @GetMapping("/search")
     DomainSearchResponse search(
-            @RequestParam("client_id") String client_id,
             @RequestParam("query") String query
     );
     @GetMapping("/status")
     DomainStatusResponse status(
-            @RequestParam("client_id") String client_id,
-            @RequestParam("domain") String domain
+            @RequestParam("client_id") String client_id
     );
 }

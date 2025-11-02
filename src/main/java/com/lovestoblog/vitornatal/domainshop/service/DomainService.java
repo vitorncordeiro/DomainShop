@@ -1,6 +1,6 @@
 package com.lovestoblog.vitornatal.domainshop.service;
 
-import client.DomainrClient;
+import client.RDAPClient;
 import client.response.DomainSearchResponse;
 import client.response.DomainStatusResponse;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,20 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class DomainService {
 
-    private final DomainrClient client;
+    private final RDAPClient client;
 
-    @Value("${domainr.clientId}")
-    private String clientId;
-
-    public DomainService(DomainrClient client){
+    public DomainService(RDAPClient client){
         this.client = client;
     }
 
     public DomainSearchResponse search(String query){
-        return  client.search(clientId, query);
-    }
-
-    public DomainStatusResponse status(String domain){
-        return client.status(clientId, domain);
+        return  client.search(query);
     }
 }

@@ -14,12 +14,9 @@ public class DomainController {
     @Autowired
     DomainService domainService;
 
-    @GetMapping
+    @GetMapping("/search")
     public DomainSearchResponse search(String query){
-        return domainService. ;
+        return domainService.search(query) ;
     }
-    @GetMapping
-    public String status(String domain){
-        return "";
-    }
+
 }
